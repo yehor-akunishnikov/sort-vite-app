@@ -7,7 +7,21 @@
     <title>Vite + TS</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div class="controls-wrapper d-flex">
+      <div>
+        <button id="sortByAge" class="btn">Sort by age</button>
+        <button id="sortByName" class="btn">Sort by name</button>
+      </div>
+  
+      <div>
+        <button data-color="red" class="btn red">Show only red</button>
+        <button data-color="blue" class="btn blue">Show only blue</button>
+        <button data-color="orange" class="btn orange">Show only orange</button>
+        <button data-color="green" class="btn green">Show only green</button>
+      </div>
+    </div>
+
+    <div id="root"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

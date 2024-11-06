@@ -1,24 +1,53 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import './style.css';
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+interface User {
+    name: string;
+    age: number;
+    favoriteColor: 'Red' | 'Blue' | 'Orange' | 'Green';
+}
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const root = document.querySelector<HTMLDivElement>('#root');
+
+const sortByAgeBtn = document.querySelector<HTMLButtonElement>('#sortByAge');
+const sortByNameBtn = document.querySelector<HTMLButtonElement>('#sortByName');
+
+const colorButtons = document.querySelectorAll<HTMLButtonElement>('button[data-color]');
+
+const users: User[] = [
+    {name: 'Oleg', age: 22, favoriteColor: 'Red'},
+    {name: 'Sam', age: 30, favoriteColor: 'Blue'},
+    {name: 'Viktor', age: 18, favoriteColor: 'Orange'},
+    {name: 'Olena', age: 20, favoriteColor: 'Red'},
+    {name: 'Natali', age: 19, favoriteColor: 'Orange'},
+    {name: 'Joka1337', age: 16, favoriteColor: 'Blue'},
+    {name: 'Kate', age: 12, favoriteColor: 'Green'},
+];
+
+const createListItem = (text): HTMLLIElement => {
+    const li = document.createElement('li');
+
+    li.innerText = text;
+
+    return li;
+};
+
+const setListeners = () => {
+    sortByAgeBtn.addEventListener('click', console.log);
+    sortByNameBtn.addEventListener('click', console.log);
+
+    colorButtons.forEach(btn => btn.addEventListener('click', console.log));
+};
+
+const render = (): void => {
+    const ul = document.createElement('ul');
+
+    ul.append(...users.map((user) => {
+        return createListItem(Object.entries(user).map(entry => entry.join(': ')).join(', '));
+    }));
+
+    setListeners();
+
+    root.append(ul);
+};
+
+render();
