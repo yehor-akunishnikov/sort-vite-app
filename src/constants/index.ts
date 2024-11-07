@@ -1,5 +1,6 @@
 import {AppState} from '../models';
 
+/* Default state of the application */
 export const state: AppState = {
     users: [
         {name: 'Sam', age: 30, favoriteColor: 'blue'},

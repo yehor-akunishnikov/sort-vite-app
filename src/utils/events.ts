@@ -1,32 +1,46 @@
 import {AppState, Controls, FavoriteColor} from '../models';
 import {render} from './render.ts';
 
+/* Mark sort button as active 'light blue color' */
+const toggleButtonState = (
+    isAlreadyActive: boolean,
+    button: HTMLButtonElement,
+    oppositeButton: HTMLButtonElement
+): void => {
+    if (isAlreadyActive) {
+        button.classList.remove('active');
+    } else {
+        button.classList.add('active');
+        oppositeButton.classList.remove('active');
+    }
+};
+
+/* Set listeners for control elements */
 export const setListeners = (
     root: HTMLDivElement,
     controls: Controls,
     appState: AppState
-) => {
+): void => {
     controls.sortByAgeBtn.addEventListener('click', () => {
-        if (appState.activeFilters.sortBy === 'age') {
-            appState.activeFilters.sortBy = null;
-            controls.sortByAgeBtn.classList.remove('active');
-        } else {
-            appState.activeFilters.sortBy = 'age';
-            controls.sortByAgeBtn.classList.add('active');
-            controls.sortByNameBtn.classList.remove('active');
-        }
+        appState.activeFilters.sortBy = appState.activeFilters.sortBy === 'age' ? null : 'age';
+
+        toggleButtonState(
+            appState.activeFilters.sortBy === 'age',
+            controls.sortByAgeBtn,
+            controls.sortByNameBtn
+        );
 
         render(root, appState);
     });
+
     controls.sortByNameBtn.addEventListener('click', () => {
-        if (appState.activeFilters.sortBy === 'name') {
-            appState.activeFilters.sortBy = null;
-            controls.sortByNameBtn.classList.remove('active');
-        } else {
-            appState.activeFilters.sortBy = 'name';
-            controls.sortByNameBtn.classList.add('active');
-            controls.sortByAgeBtn.classList.remove('active');
-        }
+        appState.activeFilters.sortBy = appState.activeFilters.sortBy === 'name' ? null : 'name';
+
+        toggleButtonState(
+            appState.activeFilters.sortBy === 'name',
+            controls.sortByNameBtn,
+            controls.sortByAgeBtn
+        );
 
         render(root, appState);
     });

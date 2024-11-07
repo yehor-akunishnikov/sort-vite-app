@@ -1,6 +1,7 @@
 import {applyFilters} from './filters.ts';
-import {AppState} from '../models';
+import {AppState, User} from '../models';
 
+/* Create "li" element */
 const createListItem = (text: string): HTMLLIElement => {
     const li = document.createElement('li');
 
@@ -9,15 +10,14 @@ const createListItem = (text: string): HTMLLIElement => {
     return li;
 };
 
-export const render = (
-    root: HTMLDivElement,
-    appState: AppState
-): void => {
+/* Render from current app state */
+export const render = (root: HTMLDivElement, appState: AppState): void => {
+    const usersListWithAppliedFilters: User[] = applyFilters(appState);
     const ul = document.createElement('ul');
 
     root.innerHTML = '';
 
-    ul.append(...applyFilters(appState).map((user) => {
+    ul.append(...usersListWithAppliedFilters.map((user) => {
         return createListItem(Object.entries(user).map(entry => entry.join(': ')).join(', '));
     }));
 
