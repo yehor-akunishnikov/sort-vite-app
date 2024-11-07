@@ -30,6 +30,10 @@ li:not(:last-child) {
   transition: opacity .2s linear;
 }
 
+.btn.active {
+  background-color: aqua;
+}
+
 .btn:hover {
   opacity: .7;
 }
