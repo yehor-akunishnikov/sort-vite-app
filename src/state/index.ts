@@ -103,7 +103,7 @@ const users: User[] = [
 
 const currentUsers: User[] = [];
 const processingState: ProcessingState = {
-    sort: {direction: 'descend'},
+    sort: null,
     filter: null,
     pagination: {currentPage: 0, itemsPerPage: 10},
     search: null,

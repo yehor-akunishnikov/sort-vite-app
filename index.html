@@ -7,13 +7,18 @@
     <title>Vite + TS</title>
   </head>
   <body>
+    <div class="search-container">
+      <label for="search">Find user</label>
+      <input type="text" id="search">
+    </div>
+
     <div class="controls-wrapper d-flex">
-      <div>
+      <div class="sort-buttons">
         <button id="sortByAge" class="btn">Sort by age</button>
         <button id="sortByName" class="btn">Sort by name</button>
       </div>
   
-      <div>
+      <div class="filter-buttons">
         <button data-color="red" class="btn red">Show only red</button>
         <button data-color="blue" class="btn blue">Show only blue</button>
         <button data-color="orange" class="btn orange">Show only orange</button>

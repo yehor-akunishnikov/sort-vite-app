@@ -1,3 +1,7 @@
+.search-container {
+  margin-bottom: 1rem;
+}
+
 .app-root {
   margin-bottom: 1rem;
 }
@@ -20,7 +24,7 @@ li:not(:last-child) {
 }
 
 .controls-wrapper {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .d-flex {
@@ -28,14 +32,21 @@ li:not(:last-child) {
   justify-content: space-between;
 }
 
+.filter-buttons .btn:not(:last-child),
+.sort-buttons .btn:not(:last-child) {
+  margin-right: 0.25rem;
+}
+
 .btn {
   border-radius: 0.25rem;
   cursor: pointer;
   transition: opacity .2s linear;
+  position: relative;
 }
 
-.btn.active {
+.sort-buttons .btn.active {
   background-color: aqua;
+  position: relative;
 }
 
 .btn:hover {
@@ -53,6 +64,21 @@ li:not(:last-child) {
 }
 .btn.green {
   background-color:green;
+}
+
+.filter-buttons .btn.active:after {
+  content: '';
+
+  width: 12px;
+  height: 12px;
+
+  position: absolute;
+  top: -6px;
+  left: -6px;
+
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid #000;
 }
 
 .pagination-btn {

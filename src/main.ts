@@ -12,6 +12,7 @@ import {Controls} from './models';
 const root = document.querySelector<HTMLDivElement>('#root');
 const paginationRoot = document.querySelector<HTMLDivElement>('#paginationRoot');
 const controls: Controls = {
+    search: document.querySelector<HTMLInputElement>('#search'),
     sortByAgeBtn: document.querySelector<HTMLButtonElement>('#sortByAge'),
     sortByNameBtn: document.querySelector<HTMLButtonElement>('#sortByName'),
     colorButtons: document.querySelectorAll<HTMLButtonElement>('button[data-color]')

@@ -21,26 +21,33 @@ export const setListeners = (
     appState: AppState,
     render: () => void
 ): void => {
+    controls.search.addEventListener('input', () => {
+        appState.processingState.search = controls.search.value;
+        appState.processingState.pagination.currentPage = 0;
+
+        render();
+    });
+
     controls.sortByAgeBtn.addEventListener('click', () => {
         toggleButtonState(
-            appState.processingState.sort.type === 'age',
+            appState.processingState.sort === 'age',
             controls.sortByAgeBtn,
             controls.sortByNameBtn
         );
 
-        appState.processingState.sort.type = appState.processingState.sort.type === 'age' ? null : 'age';
+        appState.processingState.sort = appState.processingState.sort === 'age' ? null : 'age';
 
         render();
     });
 
     controls.sortByNameBtn.addEventListener('click', () => {
         toggleButtonState(
-            appState.processingState.sort.type === 'name',
+            appState.processingState.sort === 'name',
             controls.sortByNameBtn,
             controls.sortByAgeBtn
         );
 
-        appState.processingState.sort.type = appState.processingState.sort.type === 'name' ? null : 'name';
+        appState.processingState.sort = appState.processingState.sort === 'name' ? null : 'name';
 
         render();
     });
@@ -50,6 +57,14 @@ export const setListeners = (
         const color = target.getAttribute('data-color') as FavoriteColor;
 
         appState.processingState.filter = color === appState.processingState.filter ? null : color;
+        appState.processingState.pagination.currentPage = 0;
+
+        controls.colorButtons.forEach(colorBtn => {
+            if (colorBtn !== btn) {
+                colorBtn.classList.remove('active');
+            }
+        });
+        btn.classList.toggle('active');
 
         render();
     }));
