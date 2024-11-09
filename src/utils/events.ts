@@ -1,5 +1,5 @@
-import {AppState, Controls, FavoriteColor} from '../models';
-import {render} from './render.ts';
+import {Controls, FavoriteColor} from '../models';
+import {AppState} from '../state';
 
 /* Mark sort button as active 'light blue color' */
 const toggleButtonState = (
@@ -17,40 +17,40 @@ const toggleButtonState = (
 
 /* Set listeners for control elements */
 export const setListeners = (
-    root: HTMLDivElement,
     controls: Controls,
-    appState: AppState
+    appState: AppState,
+    render: () => void
 ): void => {
     controls.sortByAgeBtn.addEventListener('click', () => {
-        appState.activeFilters.sortBy = appState.activeFilters.sortBy === 'age' ? null : 'age';
-
         toggleButtonState(
-            appState.activeFilters.sortBy === 'age',
+            appState.processingState.sort.type === 'age',
             controls.sortByAgeBtn,
             controls.sortByNameBtn
         );
 
-        render(root, appState);
+        appState.processingState.sort.type = appState.processingState.sort.type === 'age' ? null : 'age';
+
+        render();
     });
 
     controls.sortByNameBtn.addEventListener('click', () => {
-        appState.activeFilters.sortBy = appState.activeFilters.sortBy === 'name' ? null : 'name';
-
         toggleButtonState(
-            appState.activeFilters.sortBy === 'name',
+            appState.processingState.sort.type === 'name',
             controls.sortByNameBtn,
             controls.sortByAgeBtn
         );
 
-        render(root, appState);
+        appState.processingState.sort.type = appState.processingState.sort.type === 'name' ? null : 'name';
+
+        render();
     });
 
     controls.colorButtons.forEach(btn => btn.addEventListener('click', (e) => {
         const target = e.target as HTMLButtonElement;
         const color = target.getAttribute('data-color') as FavoriteColor;
 
-        appState.activeFilters.colorFilter = color === appState.activeFilters.colorFilter ? null : color;
+        appState.processingState.filter = color === appState.processingState.filter ? null : color;
 
-        render(root, appState);
+        render();
     }));
 };

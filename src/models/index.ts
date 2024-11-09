@@ -1,5 +1,4 @@
 export type FavoriteColor = 'red' | 'blue' | 'orange' | 'green';
-export type SortOption = 'name' | 'age';
 
 export interface User {
     name: string;
@@ -7,18 +6,26 @@ export interface User {
     favoriteColor: FavoriteColor;
 }
 
-export interface FiltersState {
-    sortBy: SortOption | null;
-    colorFilter: FavoriteColor | null;
+export interface SortState {
+    type?: 'age' | 'name';
+    direction: 'ascend' | 'descend';
+}
+
+export interface PaginationState {
+    pagesTotal?: number;
+    currentPage: number;
+    itemsPerPage: number;
+}
+
+export interface ProcessingState {
+    sort: SortState;
+    filter: FavoriteColor;
+    pagination: PaginationState;
+    search: string;
 }
 
 export interface Controls {
     sortByAgeBtn: HTMLButtonElement;
     sortByNameBtn: HTMLButtonElement;
     colorButtons: NodeListOf<HTMLButtonElement>;
-}
-
-export interface AppState {
-    users: User[];
-    activeFilters: FiltersState;
 }
