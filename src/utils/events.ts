@@ -36,6 +36,7 @@ export const setListeners = (
         );
 
         appState.processingState.sort = appState.processingState.sort === 'age' ? null : 'age';
+        appState.processingState.pagination.currentPage = 0;
 
         render();
     });
@@ -48,6 +49,7 @@ export const setListeners = (
         );
 
         appState.processingState.sort = appState.processingState.sort === 'name' ? null : 'name';
+        appState.processingState.pagination.currentPage = 0;
 
         render();
     });
